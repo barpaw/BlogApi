@@ -12,4 +12,28 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Application\DTOs\" />
+      <Folder Include="Application\Extensions\" />
+      <Folder Include="Application\Interfaces\" />
+      <Folder Include="Application\Services\" />
+      <Folder Include="Application\Validators\" />
+      <Folder Include="Core\Entities\" />
+      <Folder Include="Core\Enums\" />
+      <Folder Include="Core\Events\" />
+      <Folder Include="Core\Exceptions\" />
+      <Folder Include="Core\Interfaces\" />
+      <Folder Include="Infrastructure\Data\" />
+      <Folder Include="Infrastructure\Repositories\" />
+      <Folder Include="Infrastructure\Services\" />
+      <Folder Include="Shared\Constants\" />
+      <Folder Include="Shared\Extensions\" />
+      <Folder Include="Shared\Helpers\" />
+      <Folder Include="Shared\Utilities\" />
+      <Folder Include="Tests\IntegrationTests\" />
+      <Folder Include="Tests\Mock\" />
+      <Folder Include="Tests\UnitTests\" />
+      <Folder Include="WebApi\" />
+    </ItemGroup>
+
 </Project>
