@@ -1,15 +1,51 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\DTOs\" />
+      <Folder Include="Application\Extensions\" />
+      <Folder Include="Application\Interfaces\" />
+      <Folder Include="Application\Services\" />
+      <Folder Include="Application\Validators\" />
+      <Folder Include="Core\Enums\" />
+      <Folder Include="Core\Events\" />
+      <Folder Include="Core\Exceptions\" />
+      <Folder Include="Infrastructure\Services\" />
+      <Folder Include="Shared\Constants\" />
+      <Folder Include="Shared\Helpers\" />
+      <Folder Include="Shared\Utilities\" />
+      <Folder Include="Tests\IntegrationTests\" />
+      <Folder Include="Tests\Mock\" />
+      <Folder Include="Tests\UnitTests\" />
+      <Folder Include="WebApi\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>
