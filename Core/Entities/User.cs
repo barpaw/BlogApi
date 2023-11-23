@@ -11,7 +11,7 @@ public class User : IdentityUser
     
     public string? Bio { get; set; }
     
-    public ICollection<Post>? Posts { get; set; }
+    public virtual ICollection<Post>? Posts { get; set; }
     
-    public ICollection<Comment>? Comments { get; set; }
+    public virtual ICollection<Comment>? Comments { get; set; }
 }
