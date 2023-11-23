@@ -8,20 +8,30 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="8.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\DTOs\" />
       <Folder Include="Application\Extensions\" />
       <Folder Include="Application\Interfaces\" />
       <Folder Include="Application\Services\" />
@@ -31,12 +41,10 @@
       <Folder Include="Core\Exceptions\" />
       <Folder Include="Infrastructure\Services\" />
       <Folder Include="Shared\Constants\" />
-      <Folder Include="Shared\Helpers\" />
       <Folder Include="Shared\Utilities\" />
       <Folder Include="Tests\IntegrationTests\" />
       <Folder Include="Tests\Mock\" />
       <Folder Include="Tests\UnitTests\" />
-      <Folder Include="WebApi\" />
     </ItemGroup>
 
     <ItemGroup>

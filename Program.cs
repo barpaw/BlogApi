@@ -1,9 +1,12 @@
+using System.Reflection;
 using System.Security.Principal;
 using BlogApi.Core.Entities;
 using BlogApi.Infrastructure.Data;
 using BlogApi.Shared.Extensions.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -25,12 +28,26 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
+
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Blog API",
+        Description = "Blog API (ASP.NET Core Web API)"
+    });
+
+    options.AddServer(new OpenApiServer { Url = "/api" });
+    options.SupportNonNullableReferenceTypes();
+
+    options.DocInclusionPredicate((_, _) => true);
 });
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 
 builder.Services.AddAuthorizationBuilder();
 
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -50,6 +67,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     {
         options.EnableSensitiveDataLogging();
     }
+
+    options.UseLazyLoadingProxies();
 });
 
 builder.Services.AddIdentityCore<User>(options =>
@@ -59,6 +78,7 @@ builder.Services.AddIdentityCore<User>(options =>
     }).AddEntityFrameworkStores<AppDbContext>()
     .AddApiEndpoints();
 
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.RegisterRepositories();
 
@@ -78,5 +98,7 @@ app.MapIdentityApi<User>();
 
 
 app.MapControllers();
+
+app.UsePathBase("/api");
 
 app.Run();
