@@ -6,7 +6,7 @@ namespace BlogApi.Shared.Extensions.Queryable;
 
 public static class QueryableExtensions
 {
-    public static IQueryable<T> ApplySorting<T>(this IQueryable<T> query, string orderBy)
+    public static IQueryable<T> ApplySorting<T>(this IQueryable<T> query, IEnumerable<SortCriteria> orders)
     {
         return query;
     }
@@ -23,17 +23,21 @@ public static class QueryableExtensions
 
         foreach (var filter in filters)
         {
-            var propertyName = filter.FieldName;
-            var property = Expression.Property(parameterExpression, propertyName);
+            var property = Expression.Property(parameterExpression, filter.Field);
             var value = Expression.Constant(filter.Value, filter.Value.GetType());
 
             Expression binaryExpression = filter.Operation switch
             {
                 "eq" => Expression.Equal(property, value),
+                "neq" => Expression.NotEqual(property, value),
                 "gt" => Expression.GreaterThan(property, value),
                 "lt" => Expression.LessThan(property, value),
-
-
+                "gte" => Expression.GreaterThanOrEqual(property, value),
+                "lte" => Expression.LessThanOrEqual(property, value),
+                "contains" => Expression.Call(property, typeof(string).GetMethod("Contains", new[] { typeof(string) }), value),
+                "isNull" => Expression.Equal(property, Expression.Constant(null)),
+                "isNotNull" => Expression.NotEqual(property, Expression.Constant(null)),
+                // Dodaj tutaj więcej przypadków dla innych operacji
                 _ => throw new ArgumentException($"Nieobsługiwana operacja: {filter.Operation}")
             };
 

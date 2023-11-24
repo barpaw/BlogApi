@@ -1,11 +1,9 @@
-using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs;
 using BlogApi.Application.Queries;
 using BlogApi.Shared.Helpers.Queryable;
-using BlogApi.WebApi.Static;
+using BlogApi.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace BlogApi.WebApi.Controllers.Tag;
 
@@ -27,7 +25,7 @@ public class GetTags : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<TagDto>>> Get([FromQuery] QueryParameters queryParams)
+    public async Task<ActionResult<IEnumerable<TagDto>>> Get([FromQuery] GetTagsQueryParameters queryParams)
     {
         try
         {

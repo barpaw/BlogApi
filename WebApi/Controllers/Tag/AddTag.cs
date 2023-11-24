@@ -1,5 +1,4 @@
 using BlogApi.Application.Commands;
-using BlogApi.WebApi.Static;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
