@@ -1,7 +1,7 @@
 namespace BlogApi.Shared.Helpers.Queryable;
 
-public class OrderCriteria
+public class SortCriteria
 {
-    public string FieldName { get; set; }
+    public string Field { get; set; }
     public string Direction { get; set; }
 }

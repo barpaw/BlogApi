@@ -1,4 +1,3 @@
-using BlogApi.WebApi.Static;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApi.WebApi.Controllers.Post;
@@ -6,7 +5,6 @@ namespace BlogApi.WebApi.Controllers.Post;
 [ApiController]
 [Tags("Post")]
 [Route("posts")]
-[ApiExplorerSettings(GroupName = ApiGroupName.Post)]
 public class PostController : ControllerBase
 {
     private readonly ILogger<PostController> _logger;

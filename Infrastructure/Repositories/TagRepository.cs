@@ -4,6 +4,8 @@ using BlogApi.Core.Interfaces.Repositories;
 using BlogApi.Infrastructure.Data;
 using BlogApi.Shared.Extensions.Queryable;
 using BlogApi.Shared.Helpers.Queryable;
+using BlogApi.WebApi.Controllers.Tag;
+using BlogApi.WebApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApi.Infrastructure.Repositories;
@@ -24,9 +26,10 @@ public class TagRepository : ITagRepository
         await _appDbContext.AddAsync(tag);
     }
 
-    public async Task<PagedResult<Tag>> GetAsync(QueryParameters queryParameters)
+    public async Task<PagedResult<Tag>> GetAsync(GetTagsQueryParameters queryParameters)
     {
         var query = _appDbContext.Tags.AsQueryable();
+
         return await query.GetPagedAsync(queryParameters);
     }
 
