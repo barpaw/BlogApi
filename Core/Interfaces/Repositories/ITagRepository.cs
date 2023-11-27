@@ -10,4 +10,5 @@ public interface ITagRepository : IDisposable
 {
     Task AddAsync(Tag tag);
     Task<PagedResult<Tag>> GetAsync(GetTagsQueryParameters queryParameters);
+    Task<bool> Delete(Guid id);
 }
