@@ -1,7 +1,6 @@
 using BlogApi.Application.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace BlogApi.WebApi.Controllers.Tag;
 
@@ -23,8 +22,13 @@ public class AddTag : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Post([FromBody] AddTagCommand command, CancellationToken cancellationToken)
+    public async Task<ActionResult> Post([FromBody] AddTagCommand command, CancellationToken cancellationToken)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var tag = await _mediator.Send(command, cancellationToken);
 
         return CreatedAtAction(nameof(Post), new { id = tag.Id }, tag);
