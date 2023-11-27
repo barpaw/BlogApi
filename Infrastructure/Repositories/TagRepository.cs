@@ -33,6 +33,20 @@ public class TagRepository : ITagRepository
         return await query.GetPagedAsync(queryParameters);
     }
 
+    public async Task<bool> Delete(Guid id)
+    {
+        var entity = await _appDbContext.Tags.FindAsync(id);
+
+        if (entity == null)
+        {
+            return false;
+        }
+
+        _appDbContext.Tags.Remove(entity);
+
+        return true;
+    }
+
     public void Dispose()
     {
         // TODO release managed resources here

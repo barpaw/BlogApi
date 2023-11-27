@@ -19,11 +19,11 @@ public class AddTag : ControllerBase
         _logger = logger;
         _mediator = mediator;
     }
-    
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Post(AddTagCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Post([FromBody] AddTagCommand command, CancellationToken cancellationToken)
     {
         var tag = await _mediator.Send(command, cancellationToken);
 
