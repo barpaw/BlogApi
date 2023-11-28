@@ -10,4 +10,7 @@ public class PagedResult<T>
 
     public bool HasPreviousPage => CurrentPage > 1;
     public bool HasNextPage => CurrentPage < TotalPages;
+
+    public string? OrderBy { get; set; }
+    public string? OrderDirection { get; set; }
 }

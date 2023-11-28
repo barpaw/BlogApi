@@ -25,7 +25,7 @@ public class GetTags : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<TagDto>>> Get([FromQuery] GetTagsQueryParameters queryParams)
+    public async Task<ActionResult<IEnumerable<TagDto>>> Get([FromQuery] QueryParameters queryParams)
     {
         try
         {

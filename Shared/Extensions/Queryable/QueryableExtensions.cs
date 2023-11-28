@@ -6,9 +6,21 @@ namespace BlogApi.Shared.Extensions.Queryable;
 
 public static class QueryableExtensions
 {
-    public static IQueryable<T> ApplySorting<T>(this IQueryable<T> query, IEnumerable<SortCriteria> orders)
+    public static IQueryable<T> ApplySorting<T>(this IQueryable<T> query, QueryParameters queryParams)
     {
-        return query;
+        if (string.IsNullOrWhiteSpace(queryParams.OrderBy))
+        {
+            return query;
+        }
+        
+        var parameter = Expression.Parameter(typeof(T), "x");
+        var property = Expression.Property(parameter, queryParams.OrderBy);
+        var lambda = Expression.Lambda(property, parameter);
+
+        var methodName = queryParams.OrderDirection.ToLower() == "desc" ? "OrderByDescending" : "OrderBy";
+        var resultExpression = Expression.Call(typeof(System.Linq.Queryable), methodName, new Type[] { typeof(T), property.Type }, query.Expression, Expression.Quote(lambda));
+
+        return query.Provider.CreateQuery<T>(resultExpression);
     }
 
     public static IQueryable<T> ApplyFiltering<T>(this IQueryable<T> query, IEnumerable<FilterCriteria> filters)
@@ -82,6 +94,9 @@ public static class QueryableExtensions
 
         var skip = (queryParams.Page - 1) * queryParams.PageSize;
         result.Items = await query.Skip(skip).Take(queryParams.PageSize).ToListAsync();
+
+        result.OrderBy = queryParams.OrderBy;
+        result.OrderDirection = queryParams.OrderDirection;
 
         return result;
     }
