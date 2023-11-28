@@ -28,24 +28,22 @@ public class TagRepository : ITagRepository
         await _appDbContext.AddAsync(tag);
     }
 
-    public async Task<PagedResult<TagDto>> GetAsync(GetTagsQueryParameters queryParameters)
+    public async Task<PagedResult<TagDto>> GetAsync(QueryParameters queryParameters)
     {
-        var query = _appDbContext.Tags.Select(t => new TagDto(t.Id, t.Name)).AsQueryable();
+        var query = _appDbContext.Tags.AsQueryable();
 
-        return await query.GetPagedAsync(queryParameters);
+        var retQuery = query.ApplySorting(queryParameters).Select(t => new TagDto(t.Id, t.Name)).AsQueryable();
 
-
+        return await retQuery.GetPagedAsync(queryParameters);
     }
 
 
     public async Task<TagDto> GetByIdAsync(Guid id)
     {
-
         var tag = await _appDbContext.Tags
             .FirstOrDefaultAsync(t => t.Id == id);
 
         return _mapper.Map<TagDto>(tag);
-
     }
 
     public async Task<bool> Delete(Guid id)
@@ -75,7 +73,6 @@ public class TagRepository : ITagRepository
 
         return true;
     }
-
 
 
     public void Dispose()

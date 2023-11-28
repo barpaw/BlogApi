@@ -5,4 +5,4 @@ using MediatR;
 
 namespace BlogApi.Application.Queries;
 
-public record GetTagsQuery(GetTagsQueryParameters queryParams) : IRequest<PagedResult<TagDto>>;
+public record GetTagsQuery(QueryParameters queryParams) : IRequest<PagedResult<TagDto>>;
