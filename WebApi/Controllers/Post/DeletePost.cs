@@ -3,11 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Tag;
+namespace BlogApi.WebApi.Controllers.Post;
 
 [ApiController]
-[Tags("Tag")]
-[Route("tags/{Id:guid}")]
+[Tags("Post")]
+[Route("posts/{Id:guid}")]
 public class DeleteTag : ControllerBase
 {
     private readonly ILogger<DeleteTag> _logger;
@@ -23,8 +23,8 @@ public class DeleteTag : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [SwaggerOperation(Summary = "Delete Tag")]
-    public async Task<ActionResult> Delete([FromRoute] DeleteTagCommand command, CancellationToken cancellationToken)
+    [SwaggerOperation(Summary = "Delete Post")]
+    public async Task<ActionResult> Delete([FromRoute] DeletePostCommand command, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(command, cancellationToken);
 

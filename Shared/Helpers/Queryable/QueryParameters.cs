@@ -5,7 +5,7 @@ namespace BlogApi.Shared.Helpers.Queryable;
 public class QueryParameters
 {
 
-    [DefaultValue("name")]
+    [DefaultValue("Id")]
     public string OrderBy { get; set; } = "Id";
     [DefaultValue("asc")]
     public string OrderDirection { get; set; } = "desc";

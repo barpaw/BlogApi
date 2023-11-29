@@ -40,7 +40,6 @@
       <Folder Include="Core\Events\" />
       <Folder Include="Core\Exceptions\" />
       <Folder Include="Infrastructure\Services\" />
-      <Folder Include="Shared\Constants\" />
       <Folder Include="Shared\Utilities\" />
       <Folder Include="Tests\IntegrationTests\" />
       <Folder Include="Tests\Mock\" />

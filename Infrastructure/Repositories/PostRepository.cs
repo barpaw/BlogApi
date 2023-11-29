@@ -28,6 +28,55 @@ public class PostRepository : IPostRepository
         await _appDbContext.AddAsync(post);
     }
 
+    public async Task<PagedResult<PostDto>> GetAsync(QueryParameters queryParameters)
+    {
+        var query = _appDbContext.Posts.AsQueryable();
+
+        var retQuery = query.ApplySorting(queryParameters)
+            .Select(t => new PostDto(t.Id, t.Title, t.Content, t.UserId, t.PublishedDate, t.IsPublished)).AsQueryable();
+
+        return await retQuery.GetPagedAsync(queryParameters);
+    }
+
+    public async Task<PostDto> GetByIdAsync(Guid id)
+    {
+        var tag = await _appDbContext.Posts
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        return _mapper.Map<PostDto>(tag);
+    }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        var entity = await _appDbContext.Posts.FindAsync(id);
+
+        if (entity == null)
+        {
+            return false;
+        }
+
+        _appDbContext.Posts.Remove(entity);
+
+        return true;
+    }
+
+    public async Task<bool> Update(Guid id, UpdatePostDto updatePostDto)
+    {
+        var entity = await _appDbContext.Posts.FindAsync(id);
+
+        if (entity == null)
+        {
+            return false;
+        }
+
+        entity.IsPublished = updatePostDto.IsPublished;
+        entity.Content = updatePostDto.Content;
+        entity.Title = updatePostDto.Title;
+        entity.UserId = updatePostDto.UserId;
+
+        return true;
+    }
+
 
     public void Dispose()
     {

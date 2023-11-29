@@ -2,6 +2,7 @@ using AutoMapper;
 using BlogApi.Application.DTOs;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces.UoW;
+using BlogApi.Shared.Constants;
 using MediatR;
 
 namespace BlogApi.Application.Commands.Handlers;
@@ -28,7 +29,7 @@ public sealed class AddPostHandler : IRequestHandler<AddPostCommand, PostDto>
             Title = request.Title,
             PublishedDate = DateTimeOffset.Now,
             IsPublished = false,
-            UserId = "de49b5a2-66d6-46b7-a12a-c5154797686e"
+            UserId = UserHardcoded.UserId
         };
 
         await _unitOfWork.Posts.AddAsync(post);

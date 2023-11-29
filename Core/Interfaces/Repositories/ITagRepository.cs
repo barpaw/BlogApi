@@ -11,5 +11,5 @@ public interface ITagRepository : IDisposable
     Task<PagedResult<TagDto>> GetAsync(QueryParameters queryParameters);
     Task<TagDto> GetByIdAsync(Guid id);
     Task<bool> Delete(Guid id);
-    Task<bool> Update(TagDto tagDto);
+    Task<bool> Update(Guid id, UpdateTagDto updateTagDto);
 }

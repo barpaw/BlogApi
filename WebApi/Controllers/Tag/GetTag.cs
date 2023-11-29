@@ -2,12 +2,13 @@ using BlogApi.Application.DTOs;
 using BlogApi.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace BlogApi.WebApi.Controllers.Tag;
 
 [ApiController]
 [Tags("Tag")]
-[Route("tag{Id:guid}")]
+[Route("tag/{Id:guid}")]
 [Produces("application/json")]
 public class GetTag : ControllerBase
 {
@@ -23,6 +24,7 @@ public class GetTag : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(Summary = "Get Tag By Id")]
     public async Task<ActionResult<TagDto>> Get([FromRoute] Guid Id)
     {
         try

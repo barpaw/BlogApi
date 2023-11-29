@@ -3,5 +3,5 @@ using MediatR;
 
 namespace BlogApi.Application.Commands
 {
-    public record UpdateTagCommand(TagDto TagDto) : IRequest<bool>;
+    public record UpdateTagCommand(Guid Id, UpdateTagDto UpdateTagDto) : IRequest<bool>;
 }
