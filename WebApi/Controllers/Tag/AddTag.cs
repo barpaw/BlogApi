@@ -1,6 +1,7 @@
 using BlogApi.Application.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace BlogApi.WebApi.Controllers.Tag;
 
@@ -22,6 +23,7 @@ public class AddTag : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(Summary = "Add Tag")]
     public async Task<ActionResult> Post([FromBody] AddTagCommand command, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)

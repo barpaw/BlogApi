@@ -1,23 +1,22 @@
 using BlogApi.Application.DTOs;
 using BlogApi.Application.Queries;
 using BlogApi.Shared.Helpers.Queryable;
-using BlogApi.WebApi.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Tag;
+namespace BlogApi.WebApi.Controllers.Comment;
 
 [ApiController]
-[Tags("Tag")]
-[Route("tags")]
+[Tags("Comment")]
+[Route("comments")]
 [Produces("application/json")]
-public class GetTags : ControllerBase
+public class GetComments : ControllerBase
 {
-    private readonly ILogger<GetTags> _logger;
+    private readonly ILogger<GetComments> _logger;
     private readonly IMediator _mediator;
 
-    public GetTags(ILogger<GetTags> logger, IMediator mediator)
+    public GetComments(ILogger<GetComments> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
@@ -26,17 +25,17 @@ public class GetTags : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [SwaggerOperation(Summary = "Get Tags")]
-    public async Task<ActionResult<IEnumerable<TagDto>>> Get([FromQuery] QueryParameters queryParams)
+    [SwaggerOperation(Summary = "Get Comments")]
+    public async Task<ActionResult<IEnumerable<PostDto>>> Get([FromQuery] QueryParameters queryParams)
     {
         try
         {
-            var tags = await _mediator.Send(new GetTagsQuery(queryParams));
+            var tags = await _mediator.Send(new GetCommentsQuery(queryParams));
             return Ok(tags);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching tags");
+            _logger.LogError(ex, "Error occurred while fetching comments");
 
             return BadRequest("An error occurred while processing your request.");
         }

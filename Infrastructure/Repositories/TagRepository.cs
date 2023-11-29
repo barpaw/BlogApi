@@ -59,17 +59,17 @@ public class TagRepository : ITagRepository
 
         return true;
     }
-
-    public async Task<bool> Update(TagDto tagDto)
+    
+    public async Task<bool> Update(Guid id, UpdateTagDto updateTagDto)
     {
-        var entity = await _appDbContext.Tags.FindAsync(tagDto.Id);
+        var entity = await _appDbContext.Tags.FindAsync(id);
 
         if (entity == null)
         {
             return false;
         }
 
-        entity.Name = tagDto.Name;
+        entity.Name = updateTagDto.Name;
 
         return true;
     }

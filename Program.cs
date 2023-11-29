@@ -20,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -40,6 +41,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SupportNonNullableReferenceTypes();
 
     options.DocInclusionPredicate((_, _) => true);
+    
+    options.EnableAnnotations();
 });
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);

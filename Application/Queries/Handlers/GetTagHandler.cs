@@ -20,8 +20,8 @@ public sealed class GetTagHandler : IRequestHandler<GetTagQuery, TagDto>
 
     public async Task<TagDto> Handle(GetTagQuery request, CancellationToken cancellationToken)
     {
-        var tags = await _unitOfWork.Tags.GetByIdAsync(request.Id);
+        var tag = await _unitOfWork.Tags.GetByIdAsync(request.Id);
 
-        return tags;
+        return tag;
     }
 }

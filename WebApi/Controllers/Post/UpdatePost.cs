@@ -4,17 +4,17 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Tag;
+namespace BlogApi.WebApi.Controllers.Post;
 
 [ApiController]
-[Tags("Tag")]
-[Route("tags/{Id:guid}")]
-public class UpdateTag : ControllerBase
+[Tags("Post")]
+[Route("posts/{Id:guid}")]
+public class UpdatePost : ControllerBase
 {
-    private readonly ILogger<UpdateTag> _logger;
+    private readonly ILogger<UpdatePost> _logger;
     private readonly IMediator _mediator;
 
-    public UpdateTag(ILogger<UpdateTag> logger, IMediator mediator)
+    public UpdatePost(ILogger<UpdatePost> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
@@ -24,8 +24,8 @@ public class UpdateTag : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [SwaggerOperation(Summary = "Update Tag")]
-    public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdateTagDto updateTagDto,
+    [SwaggerOperation(Summary = "Update Post")]
+    public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdatePostDto updatePostDto,
         CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
@@ -33,7 +33,7 @@ public class UpdateTag : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var command = new UpdateTagCommand(Id, updateTagDto);
+        var command = new UpdatePostCommand(Id, updatePostDto);
 
         var result = await _mediator.Send(command, cancellationToken);
 

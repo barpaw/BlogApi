@@ -19,8 +19,7 @@ public sealed class UpdateTagHandler : IRequestHandler<UpdateTagCommand, bool>
 
     public async Task<bool> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
     {
-
-        var result = await _unitOfWork.Tags.Update(request.TagDto);
+        var result = await _unitOfWork.Tags.Update(request.Id, request.UpdateTagDto);
 
         if (result)
         {

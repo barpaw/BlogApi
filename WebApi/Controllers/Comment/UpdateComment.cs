@@ -1,20 +1,21 @@
 using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs;
+using BlogApi.WebApi.Controllers.Post;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Tag;
+namespace BlogApi.WebApi.Controllers.Comment;
 
 [ApiController]
-[Tags("Tag")]
-[Route("tags/{Id:guid}")]
-public class UpdateTag : ControllerBase
+[Tags("Comment")]
+[Route("comments/{Id:guid}")]
+public class UpdateComment : ControllerBase
 {
-    private readonly ILogger<UpdateTag> _logger;
+    private readonly ILogger<UpdateComment> _logger;
     private readonly IMediator _mediator;
 
-    public UpdateTag(ILogger<UpdateTag> logger, IMediator mediator)
+    public UpdateComment(ILogger<UpdateComment> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
@@ -24,8 +25,8 @@ public class UpdateTag : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [SwaggerOperation(Summary = "Update Tag")]
-    public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdateTagDto updateTagDto,
+    [SwaggerOperation(Summary = "Update Comment")]
+    public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdateCommentDto updateCommentDto,
         CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
@@ -33,7 +34,7 @@ public class UpdateTag : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var command = new UpdateTagCommand(Id, updateTagDto);
+        var command = new UpdateCommentCommand(Id, updateCommentDto);
 
         var result = await _mediator.Send(command, cancellationToken);
 
