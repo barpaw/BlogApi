@@ -11,5 +11,6 @@ public class MappingProfile : Profile
         CreateMap<Tag, TagDto>();
         CreateMap<Post, PostDto>();
         CreateMap<Comment, CommentDto>();
+        CreateMap<Category, CategoryDto>();
     }
 }

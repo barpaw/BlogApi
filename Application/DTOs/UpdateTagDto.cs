@@ -1,4 +1,3 @@
-﻿namespace BlogApi.Application.DTOs
-{
-    public record UpdateTagDto(string Name);
-}
+﻿namespace BlogApi.Application.DTOs;
+
+public record UpdateTagDto(string Name);

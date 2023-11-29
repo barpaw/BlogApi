@@ -5,18 +5,18 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Comment;
+namespace BlogApi.WebApi.Controllers.Category;
 
 [ApiController]
-[Tags("Comment")]
-[Route("comments")]
+[Tags("Category")]
+[Route("categories")]
 [Produces("application/json")]
-public class GetComments : ControllerBase
+public class GetCategories : ControllerBase
 {
-    private readonly ILogger<GetComments> _logger;
+    private readonly ILogger<GetCategories> _logger;
     private readonly IMediator _mediator;
 
-    public GetComments(ILogger<GetComments> logger, IMediator mediator)
+    public GetCategories(ILogger<GetCategories> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
@@ -25,17 +25,17 @@ public class GetComments : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [SwaggerOperation(Summary = "Get Comments")]
-    public async Task<ActionResult<IEnumerable<PostDto>>> Get([FromQuery] QueryParameters queryParams)
+    [SwaggerOperation(Summary = "Get Categories")]
+    public async Task<ActionResult<IEnumerable<CategoryDto>>> Get([FromQuery] QueryParameters queryParams)
     {
         try
         {
-            var comments = await _mediator.Send(new GetCommentsQuery(queryParams));
-            return Ok(comments);
+            var categories = await _mediator.Send(new GetCategoriesQuery(queryParams));
+            return Ok(categories);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching comments");
+            _logger.LogError(ex, "Error occurred while fetching categories");
 
             return BadRequest("An error occurred while processing your request.");
         }
