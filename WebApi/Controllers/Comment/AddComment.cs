@@ -31,8 +31,8 @@ public class AddComment : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var post = await _mediator.Send(command, cancellationToken);
+        var comment = await _mediator.Send(command, cancellationToken);
 
-        return CreatedAtAction(nameof(Post), new { id = post.Id }, post);
+        return CreatedAtAction(nameof(Post), new { id = comment.Id }, comment);
     }
 }

@@ -25,7 +25,7 @@ public class GetComment : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [SwaggerOperation(Summary = "Get Comment By Id")]
-    public async Task<ActionResult<PostDto>> Get([FromRoute] Guid Id)
+    public async Task<ActionResult<CommentDto>> Get([FromRoute] Guid Id)
     {
         try
         {

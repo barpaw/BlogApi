@@ -1,22 +1,22 @@
 using BlogApi.Application.DTOs;
 using BlogApi.Application.Queries;
-using BlogApi.Shared.Helpers.Queryable;
+using BlogApi.WebApi.Controllers.Comment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace BlogApi.WebApi.Controllers.Post;
+namespace BlogApi.WebApi.Controllers.Category;
 
 [ApiController]
-[Tags("Post")]
-[Route("posts")]
+[Tags("Category")]
+[Route("category/{Id:guid}")]
 [Produces("application/json")]
-public class GetPosts : ControllerBase
+public class GetCategory : ControllerBase
 {
-    private readonly ILogger<GetPosts> _logger;
+    private readonly ILogger<GetCategory> _logger;
     private readonly IMediator _mediator;
 
-    public GetPosts(ILogger<GetPosts> logger, IMediator mediator)
+    public GetCategory(ILogger<GetCategory> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
@@ -25,17 +25,17 @@ public class GetPosts : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [SwaggerOperation(Summary = "Get Posts")]
-    public async Task<ActionResult<IEnumerable<PostDto>>> Get([FromQuery] QueryParameters queryParams)
+    [SwaggerOperation(Summary = "Get Category By Id")]
+    public async Task<ActionResult<CategoryDto>> Get([FromRoute] Guid Id)
     {
         try
         {
-            var comments = await _mediator.Send(new GetPostsQuery(queryParams));
-            return Ok(comments);
+            var category = await _mediator.Send(new GetCategoryQuery(Id));
+            return Ok(category);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while fetching posts");
+            _logger.LogError(ex, "Error occurred while fetching category");
 
             return BadRequest("An error occurred while processing your request.");
         }
