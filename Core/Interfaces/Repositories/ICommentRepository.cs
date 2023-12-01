@@ -8,7 +8,7 @@ public interface ICommentRepository : IDisposable
 {
     Task AddAsync(Comment comment);
     Task<PagedResult<CommentDto>> GetAsync(QueryParameters queryParameters);
-    Task<CommentDto> GetByIdAsync(Guid id);
+    Task<Comment?> GetByIdAsync(Guid id);
     Task<bool> Delete(Guid id);
     Task<bool> Update(Guid id, UpdateCommentDto update);
 }

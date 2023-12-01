@@ -8,7 +8,7 @@ public interface IPostRepository : IDisposable
 {
     Task AddAsync(Post post);
     Task<PagedResult<PostDto>> GetAsync(QueryParameters queryParameters);
-    Task<PostDto> GetByIdAsync(Guid id);
+    Task<Post?> GetByIdAsync(Guid id);
     
     Task<bool> Delete(Guid id);
     Task<bool> Update(Guid id, UpdatePostDto updatePostDto);

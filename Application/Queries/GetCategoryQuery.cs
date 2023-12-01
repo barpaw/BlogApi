@@ -3,4 +3,4 @@ using MediatR;
 
 namespace BlogApi.Application.Queries;
 
-public record GetCategoryQuery(Guid Id) : IRequest<CategoryDto>;
+public record GetCategoryQuery(Guid Id) : IRequest<CategoryDto?>;

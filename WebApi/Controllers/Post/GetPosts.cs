@@ -30,8 +30,8 @@ public class GetPosts : ControllerBase
     {
         try
         {
-            var comments = await _mediator.Send(new GetPostsQuery(queryParams));
-            return Ok(comments);
+            var posts = await _mediator.Send(new GetPostsQuery(queryParams));
+            return Ok(posts);
         }
         catch (Exception ex)
         {

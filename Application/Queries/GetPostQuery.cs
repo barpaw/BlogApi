@@ -3,4 +3,4 @@ using MediatR;
 
 namespace BlogApi.Application.Queries;
 
-public record GetPostQuery(Guid Id) : IRequest<PostDto>;
+public record GetPostQuery(Guid Id) : IRequest<PostDto?>;

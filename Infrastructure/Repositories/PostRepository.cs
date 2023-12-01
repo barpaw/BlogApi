@@ -38,12 +38,12 @@ public class PostRepository : IPostRepository
         return await retQuery.GetPagedAsync(queryParameters);
     }
 
-    public async Task<PostDto> GetByIdAsync(Guid id)
+    public async Task<Post?> GetByIdAsync(Guid id)
     {
-        var tag = await _appDbContext.Posts
+        var entity = await _appDbContext.Posts
             .FirstOrDefaultAsync(t => t.Id == id);
-
-        return _mapper.Map<PostDto>(tag);
+        
+        return entity;
     }
 
     public async Task<bool> Delete(Guid id)

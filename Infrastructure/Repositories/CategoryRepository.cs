@@ -37,12 +37,12 @@ public class CategoryRepository : ICategoryRepository
     }
 
 
-    public async Task<CategoryDto> GetByIdAsync(Guid id)
+    public async Task<Category?> GetByIdAsync(Guid id)
     {
-        var tag = await _appDbContext.Categories
+        var entity = await _appDbContext.Categories
             .FirstOrDefaultAsync(t => t.Id == id);
 
-        return _mapper.Map<CategoryDto>(tag);
+        return entity;
     }
 
     public async Task<bool> Delete(Guid id)
