@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlogApi.Application.Queries.Handlers;
 
-public sealed class GetCategoryHandler : IRequestHandler<GetCategoryQuery, CategoryDto>
+public sealed class GetCategoryHandler : IRequestHandler<GetCategoryQuery, CategoryDto?>
 {
     private readonly ILogger<GetCategoryHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,10 +18,10 @@ public sealed class GetCategoryHandler : IRequestHandler<GetCategoryQuery, Categ
         _mapper = mapper;
     }
 
-    public async Task<CategoryDto> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<CategoryDto?> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var category = await _unitOfWork.Categories.GetByIdAsync(request.Id);
 
-        return category;
+        return _mapper.Map<CategoryDto?>(category);
     }
 }

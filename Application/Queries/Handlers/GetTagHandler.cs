@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlogApi.Application.Queries.Handlers;
 
-public sealed class GetTagHandler : IRequestHandler<GetTagQuery, TagDto>
+public sealed class GetTagHandler : IRequestHandler<GetTagQuery, TagDto?>
 {
     private readonly ILogger<GetTagHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,10 +18,10 @@ public sealed class GetTagHandler : IRequestHandler<GetTagQuery, TagDto>
         _mapper = mapper;
     }
 
-    public async Task<TagDto> Handle(GetTagQuery request, CancellationToken cancellationToken)
+    public async Task<TagDto?> Handle(GetTagQuery request, CancellationToken cancellationToken)
     {
         var tag = await _unitOfWork.Tags.GetByIdAsync(request.Id);
 
-        return tag;
+        return _mapper.Map<TagDto>(tag);
     }
 }

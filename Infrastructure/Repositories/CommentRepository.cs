@@ -37,12 +37,12 @@ public class CommentRepository : ICommentRepository
         return await retQuery.GetPagedAsync(queryParameters);
     }
 
-    public async Task<CommentDto> GetByIdAsync(Guid id)
+    public async Task<Comment?> GetByIdAsync(Guid id)
     {
-        var tag = await _appDbContext.Comments
+        var entity = await _appDbContext.Comments
             .FirstOrDefaultAsync(t => t.Id == id);
 
-        return _mapper.Map<CommentDto>(tag);
+        return entity;
     }
 
     public async Task<bool> Delete(Guid id)

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlogApi.Application.Queries.Handlers;
 
-public sealed class GetCommentHandler : IRequestHandler<GetCommentQuery, CommentDto>
+public sealed class GetCommentHandler : IRequestHandler<GetCommentQuery, CommentDto?>
 {
     private readonly ILogger<GetCommentHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,10 +18,10 @@ public sealed class GetCommentHandler : IRequestHandler<GetCommentQuery, Comment
         _mapper = mapper;
     }
 
-    public async Task<CommentDto> Handle(GetCommentQuery request, CancellationToken cancellationToken)
+    public async Task<CommentDto?> Handle(GetCommentQuery request, CancellationToken cancellationToken)
     {
         var comment = await _unitOfWork.Comments.GetByIdAsync(request.Id);
 
-        return comment;
+        return _mapper.Map<CommentDto?>(comment);
     }
 }

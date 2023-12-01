@@ -3,4 +3,4 @@ using MediatR;
 
 namespace BlogApi.Application.Queries;
 
-public record GetTagQuery(Guid Id) : IRequest<TagDto>;
+public record GetTagQuery(Guid Id) : IRequest<TagDto?>;

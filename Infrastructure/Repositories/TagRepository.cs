@@ -38,12 +38,12 @@ public class TagRepository : ITagRepository
     }
 
 
-    public async Task<TagDto> GetByIdAsync(Guid id)
+    public async Task<Tag?> GetByIdAsync(Guid id)
     {
-        var tag = await _appDbContext.Tags
+        var entity = await _appDbContext.Tags
             .FirstOrDefaultAsync(t => t.Id == id);
 
-        return _mapper.Map<TagDto>(tag);
+        return entity;
     }
 
     public async Task<bool> Delete(Guid id)

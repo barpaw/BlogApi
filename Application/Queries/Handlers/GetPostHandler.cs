@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlogApi.Application.Queries.Handlers;
 
-public sealed class GetPostHandler : IRequestHandler<GetPostQuery, PostDto>
+public sealed class GetPostHandler : IRequestHandler<GetPostQuery, PostDto?>
 {
     private readonly ILogger<GetPostHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,10 +18,10 @@ public sealed class GetPostHandler : IRequestHandler<GetPostQuery, PostDto>
         _mapper = mapper;
     }
 
-    public async Task<PostDto> Handle(GetPostQuery request, CancellationToken cancellationToken)
+    public async Task<PostDto?> Handle(GetPostQuery request, CancellationToken cancellationToken)
     {
         var post = await _unitOfWork.Posts.GetByIdAsync(request.Id);
 
-        return post;
+        return _mapper.Map<PostDto>(post);
     }
 }

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace BlogApi.Application.Queries;
 
-public record GetCommentQuery(Guid Id) : IRequest<CommentDto>;
+public record GetCommentQuery(Guid Id) : IRequest<CommentDto?>;

@@ -25,13 +25,20 @@ public class GetPost : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Get Post By Id")]
     public async Task<ActionResult<PostDto>> Get([FromRoute] Guid Id)
     {
         try
         {
-            var tag = await _mediator.Send(new GetPostQuery(Id));
-            return Ok(tag);
+            var post = await _mediator.Send(new GetPostQuery(Id));
+
+            if (post is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(post);
         }
         catch (Exception ex)
         {

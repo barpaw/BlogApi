@@ -24,13 +24,21 @@ public class GetComment : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Get Comment By Id")]
     public async Task<ActionResult<CommentDto>> Get([FromRoute] Guid Id)
     {
         try
         {
             var comment = await _mediator.Send(new GetCommentQuery(Id));
+
+            if (comment is null)
+            {
+                return NotFound();
+            }
+
             return Ok(comment);
+            
         }
         catch (Exception ex)
         {

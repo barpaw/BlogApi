@@ -25,13 +25,21 @@ public class GetCategory : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Get Category By Id")]
     public async Task<ActionResult<CategoryDto>> Get([FromRoute] Guid Id)
     {
         try
         {
             var category = await _mediator.Send(new GetCategoryQuery(Id));
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
             return Ok(category);
+            
         }
         catch (Exception ex)
         {
