@@ -1,4 +1,5 @@
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Post;
 using MediatR;
 
 namespace BlogApi.Application.Queries;

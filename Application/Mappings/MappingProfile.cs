@@ -1,5 +1,8 @@
 using AutoMapper;
-using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Comment;
+using BlogApi.Application.DTOs.Category;
+using BlogApi.Application.DTOs.Post;
+using BlogApi.Application.DTOs.Tag;
 using BlogApi.Core.Entities;
 
 namespace BlogApi.Application.Mappings;

@@ -1,6 +1,5 @@
 using BlogApi.Application.Commands;
-using BlogApi.Application.DTOs;
-using BlogApi.WebApi.Controllers.Post;
+using BlogApi.Application.DTOs.Comment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -26,7 +25,7 @@ public class UpdateComment : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Update Comment")]
-    public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdateCommentDto updateCommentDto,
+    public async Task<ActionResult<CommentDto>> Put([FromRoute] Guid Id, [FromBody] UpdateCommentDto updateCommentDto,
         CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
