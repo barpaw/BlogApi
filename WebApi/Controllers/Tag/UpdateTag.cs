@@ -1,5 +1,6 @@
 using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Tag;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

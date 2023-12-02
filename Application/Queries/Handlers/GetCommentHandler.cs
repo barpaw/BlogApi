@@ -1,5 +1,5 @@
 using AutoMapper;
-using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Comment;
 using BlogApi.Core.Interfaces.UoW;
 using MediatR;
 

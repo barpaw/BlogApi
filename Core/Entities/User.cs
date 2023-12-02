@@ -10,6 +10,8 @@ public class User : IdentityUser
     public string? Role { get; set; }
     
     public string? Bio { get; set; }
+    public string? RefreshToken { get; set; }
+    public DateTimeOffset? RefreshTokenExpiryTime { get; set; }
     
     public virtual ICollection<Post>? Posts { get; set; }
     

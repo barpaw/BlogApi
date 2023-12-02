@@ -1,4 +1,5 @@
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Tag;
 using BlogApi.Application.Queries;
 using BlogApi.Shared.Helpers.Queryable;
 using BlogApi.WebApi.Models;

@@ -1,5 +1,6 @@
 using AutoMapper;
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Tag;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces.Repositories;
 using BlogApi.Infrastructure.Data;

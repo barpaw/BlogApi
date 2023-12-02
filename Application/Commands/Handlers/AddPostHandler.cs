@@ -1,5 +1,6 @@
 using AutoMapper;
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Post;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces.UoW;
 using BlogApi.Shared.Constants;

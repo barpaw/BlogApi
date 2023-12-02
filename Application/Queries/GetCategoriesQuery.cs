@@ -1,4 +1,5 @@
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Category;
 using BlogApi.Shared.Helpers.Queryable;
 using MediatR;
 

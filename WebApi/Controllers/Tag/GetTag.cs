@@ -1,4 +1,5 @@
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Tag;
 using BlogApi.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

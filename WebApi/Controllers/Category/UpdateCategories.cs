@@ -1,5 +1,7 @@
 using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Category;
+using BlogApi.Application.DTOs.Tag;
 using BlogApi.WebApi.Controllers.Comment;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

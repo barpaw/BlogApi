@@ -1,7 +1,9 @@
 using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Category;
 using BlogApi.Application.Queries;
 using BlogApi.Shared.Helpers.Queryable;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -11,6 +13,7 @@ namespace BlogApi.WebApi.Controllers.Category;
 [Tags("Category")]
 [Route("categories")]
 [Produces("application/json")]
+[Authorize(Roles = "Admin")]
 public class GetCategories : ControllerBase
 {
     private readonly ILogger<GetCategories> _logger;

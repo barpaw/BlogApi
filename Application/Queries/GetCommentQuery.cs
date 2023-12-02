@@ -1,4 +1,4 @@
-using BlogApi.Application.DTOs;
+using BlogApi.Application.DTOs.Comment;
 using MediatR;
 
 namespace BlogApi.Application.Queries;
