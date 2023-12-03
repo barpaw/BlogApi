@@ -1,13 +1,13 @@
 # BlogApi
-Simple Blog API
+Simple Blog API 
 
-REST API
-CQRS
-REPOSITORY PATTERN
-UNIT OF WORK
-SOLID
+Patterns and good practises used:
+- REST
+- CQRS
+- Repository pattern
+- Unit of work
+- SOLID
+- JWT AUTH
 
-
-To Do:
-
-- Handle scenario when DB can't establish connection to DB
+#### TO DO:
+- Unit tests
