@@ -11,3 +11,4 @@ Patterns and good practises used:
 
 #### TO DO:
 - Unit tests
+- Use Polly
