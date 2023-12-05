@@ -19,4 +19,5 @@ Patterns and good practises used:
 - serilog logs
 - Use Polly (?)
 - The Operation Result Pattern (?)
+- Reorganize Layers to separate projects
 
