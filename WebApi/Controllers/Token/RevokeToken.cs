@@ -29,7 +29,7 @@ public class RevokeToken : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [SwaggerOperation(Summary = "Revoke user token")]
-    [Authorize]
+    [Authorize(Roles = "Admin,User")]
     public async Task<IActionResult> Post(string username)
     {
         try

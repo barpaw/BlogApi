@@ -1,9 +1,12 @@
 using System.Text;
+using BlogApi.Application.Middleware.Asp;
+using BlogApi.Application.Middleware.Mediatr;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces.Auth;
 using BlogApi.Infrastructure.Data;
 using BlogApi.Infrastructure.Services;
 using BlogApi.Shared.Extensions.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +52,11 @@ builder.Services.AddSwaggerGen(options =>
 // builder.Services.AddAuthorizationBuilder();
 
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly); 
+    cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -119,7 +126,12 @@ builder.Services.RegisterRepositories();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 
+// Fluent Validator
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+    
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UsePathBase("/api");
 
