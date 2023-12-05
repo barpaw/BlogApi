@@ -1,3 +1,4 @@
+using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs.Auth;
 using BlogApi.Core.Interfaces.Auth;
 using MediatR;
@@ -14,13 +15,11 @@ public class Login : ControllerBase
 {
     private readonly ILogger<Login> _logger;
     private readonly IMediator _mediator;
-    private readonly IAuthService _authService;
 
-    public Login(ILogger<Login> logger, IMediator mediator, IAuthService authService)
+    public Login(ILogger<Login> logger, IMediator mediator)
     {
         _logger = logger;
         _mediator = mediator;
-        _authService = authService;
     }
 
     [HttpPost]
@@ -28,25 +27,19 @@ public class Login : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [SwaggerOperation(Summary = "Login")]
-    public async Task<IActionResult> Post(LoginDto loginDto)
+    public async Task<ActionResult> Post(LoginCommand loginCommand, CancellationToken cancellationToken)
     {
-        try
+        var (status, authenticatedResponse, message) = await _mediator.Send(loginCommand, cancellationToken);
+        if (status == 0)
+            return BadRequest(message);
+        return Ok(new TokenDto
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid payload");
-            var (status, authenticatedResponse, message) = await _authService.Login(loginDto);
-            if (status == 0)
-                return BadRequest(message);
-            return Ok(new TokenDto
-            {
-                AccessToken = authenticatedResponse.AccessToken,
-                RefreshToken = authenticatedResponse.RefreshToken
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+            AccessToken = authenticatedResponse.AccessToken,
+            RefreshToken = authenticatedResponse.RefreshToken
+        });
+
+
+        //     _logger.LogError(ex.Message);
+        //     return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
     }
 }

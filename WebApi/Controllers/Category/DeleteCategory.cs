@@ -1,6 +1,7 @@
 using BlogApi.Application.Commands;
 using BlogApi.WebApi.Controllers.Comment;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -25,6 +26,7 @@ public class DeleteCategory : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Delete Category")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> Delete([FromRoute] DeleteCategoryCommand command, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(command, cancellationToken);

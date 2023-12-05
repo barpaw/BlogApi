@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs.Auth;
 using BlogApi.Core.Entities;
 using BlogApi.Core.Interfaces.Auth;
@@ -81,12 +82,12 @@ public class AuthService : IAuthService
         return (1, "Admin created successfully!");
     }
 
-    public async Task<(int, TokenDto?, string)> Login(LoginDto loginDto)
+    public async Task<(int, TokenDto?, string)> Login(LoginCommand login)
     {
-        var user = await _userManager.FindByNameAsync(loginDto.Username);
+        var user = await _userManager.FindByNameAsync(login.Username);
         if (user == null)
             return (0, null, "Invalid username");
-        if (!await _userManager.CheckPasswordAsync(user, loginDto.Password))
+        if (!await _userManager.CheckPasswordAsync(user, login.Password))
             return (0, null, "Invalid password");
 
         var userRoles = await _userManager.GetRolesAsync(user);

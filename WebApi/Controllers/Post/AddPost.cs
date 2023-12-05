@@ -1,5 +1,6 @@
 using BlogApi.Application.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -24,6 +25,7 @@ public class AddPost : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [SwaggerOperation(Summary = "Add Post")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> Post([FromBody] AddPostCommand command, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)

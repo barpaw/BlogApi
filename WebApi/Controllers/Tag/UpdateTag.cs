@@ -2,6 +2,7 @@ using BlogApi.Application.Commands;
 using BlogApi.Application.DTOs;
 using BlogApi.Application.DTOs.Tag;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -26,6 +27,7 @@ public class UpdateTag : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [SwaggerOperation(Summary = "Update Tag")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<TagDto>> Put([FromRoute] Guid Id, [FromBody] UpdateTagDto updateTagDto,
         CancellationToken cancellationToken)
     {

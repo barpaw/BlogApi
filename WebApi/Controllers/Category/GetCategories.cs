@@ -13,7 +13,6 @@ namespace BlogApi.WebApi.Controllers.Category;
 [Tags("Category")]
 [Route("categories")]
 [Produces("application/json")]
-[Authorize(Roles = "Admin")]
 public class GetCategories : ControllerBase
 {
     private readonly ILogger<GetCategories> _logger;

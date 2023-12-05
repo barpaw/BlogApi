@@ -1,5 +1,6 @@
 using BlogApi.Application.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -24,6 +25,7 @@ public class AddComment : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [SwaggerOperation(Summary = "Add Comment")]
+    [Authorize(Roles = "Admin,User")]
     public async Task<ActionResult> Post([FromBody] AddCommentCommand command, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid)
