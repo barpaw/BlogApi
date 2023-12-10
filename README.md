@@ -20,7 +20,8 @@ Patterns and good practises used:
 - Use Polly (?)
 - The Operation Result Pattern (?)
 - Reorganize Layers to separate projects
-- IResult pattern (https://www.linkedin.com/pulse/advanced-features-mediatr-package-pipeline-behaviors/) (https://www.youtube.com/watch?v=a1ye9eGTB98)
+- IResult pattern (https://www.linkedin.com/pulse/advanced-features-mediatr-package-pipeline-behaviors/)
+- (https://www.youtube.com/watch?v=a1ye9eGTB98)
 
 
 
